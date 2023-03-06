@@ -230,7 +230,7 @@ function Kavo.CreateLib(kavName, themeList)
     Kavo:DraggingEnabled(MainHeader, Main)
 
     function Kavo:Destory()
-        ScreenGui:Destroy()
+        Main:Destroy()
     end
 
     blurFrame.Name = "blurFrame"
