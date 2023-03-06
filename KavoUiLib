@@ -224,6 +224,8 @@ function Kavo.CreateLib(kavName, themeList)
     local pages = Instance.new("Frame")
     local Pages = Instance.new("Folder")
     local infoContainer = Instance.new("Frame")
+    local SearchBtn = Instance.new("TextButton")
+    local TextBox = Instance.new("TextBox")
 
     local blurFrame = Instance.new("Frame")
 
@@ -257,6 +259,25 @@ function Kavo.CreateLib(kavName, themeList)
     MainCorner.CornerRadius = UDim.new(0, 4)
     MainCorner.Name = "MainCorner"
     MainCorner.Parent = Main
+
+    SearchBtn.Name = "Search Btn"
+    SearchBtn.Parent = Frame
+    SearchBtn.BackgroundColor3 = Color3.fromRGB(21, 255, 37)
+    SearchBtn.Position = UDim2.new(0.822335422, 0, 0, 0)
+    SearchBtn.Size = UDim2.new(0, 70, 0, 33)
+    SearchBtn.Font = Enum.Font.Highway
+    SearchBtn.Text = "Search"
+    SearchBtn.TextColor3 = Color3.fromRGB(0, 0, 0)
+    SearchBtn.TextSize = 20.000
+
+    TextBox.Parent = Frame
+    TextBox.BackgroundColor3 = Color3.fromRGB(255, 65, 109)
+    TextBox.Position = UDim2.new(0.204030231, 0, 0, 0)
+    TextBox.Size = UDim2.new(0, 200, 0, 33)
+    TextBox.Font = Enum.Font.Highway
+    TextBox.Text = ""
+    TextBox.TextColor3 = Color3.fromRGB(0, 0, 0)
+    TextBox.TextSize = 25.000
 
     MainHeader.Name = "MainHeader"
     MainHeader.Parent = Main
@@ -586,6 +607,26 @@ function Kavo.CreateLib(kavName, themeList)
                 local Sample = Instance.new("ImageLabel")
 
                 table.insert(modules, bname)
+
+                function UpdateResults()
+                    local search = string.lower(TextBox.Text)
+                    for i, v in pairs(tabButton:GetChildren()) do
+                        if v:IsA("TextButton") then
+                            if search ~= "" then
+                                local searchButton = string.lower(v.Text)
+                                if string.find(tabButton, search) then
+                                    v.Visible = true
+                                else
+                                    v.Visible = false
+                                end
+                            else
+                                v.Visible = true
+                            end
+                        end
+                    end
+                end
+
+                SearchBtn.Changed:Connect(UpdateResults)
 
                 buttonElement.Name = bname
                 buttonElement.Parent = sectionInners
