@@ -161,14 +161,6 @@ function Kavo:ToggleUI()
     end
 end
 
-function Kavo:Destory()
-    if game.CoreGui[LibName].Enabled then
-        game.CoreGui[LibName].Enabled = true
-    else
-        game.CoreGui[LibName].Enabled = false
-    end
-end
-
 function Kavo.CreateLib(kavName, themeList)
     if not themeList then
         themeList = themes
@@ -236,6 +228,10 @@ function Kavo.CreateLib(kavName, themeList)
     local blurFrame = Instance.new("Frame")
 
     Kavo:DraggingEnabled(MainHeader, Main)
+
+    function Kavo:Destory()
+        ScreenGui:Destroy()
+    end
 
     blurFrame.Name = "blurFrame"
     blurFrame.Parent = pages
